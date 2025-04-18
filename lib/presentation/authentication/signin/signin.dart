@@ -24,6 +24,7 @@ class _SignInState extends State<SignIn> {
       body: Column(
         children: [
           Expanded(flex: 1, child: Image.asset(ImageAssets.eventlyLogo)),
+          SizedBox(height: 24.h,),
           Expanded(
             flex: 4,
             child: Padding(
@@ -41,10 +42,10 @@ class _SignInState extends State<SignIn> {
                     prefixIcon: Icons.lock,
                     isObscure: obscure,
                     suffixIcon:
-                        obscure ? Icons.visibility_off : Icons.visibility,
+                    obscure ? Icons.visibility_off : Icons.visibility,
                     onClick: onClick,
                   ),
-                  CustomTextButton(text: "Forget Password?", onPress: () {}),
+                  CustomTextButton(text: "Forget Password?", onPress: () {},),
                   CustomElevatedButton(text: "Login", onPress: () {}),
                   SizedBox(height: 16.h),
                   Row(
@@ -52,13 +53,17 @@ class _SignInState extends State<SignIn> {
                     children: [
                       Text(
                         "Don’t Have Account ? ",
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodySmall,
                       ),
                       CustomTextButton(text: "Create Account", onPress: () {}),
                     ],
                   ),
-                  CustomDivider(text: "Or"),
                   SizedBox(height: 16.h),
+                  CustomDivider(text: "Or"),
+                  SizedBox(height: 32.h),
                   CustomOutlinedButton(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +72,10 @@ class _SignInState extends State<SignIn> {
                         SizedBox(width: 6.w),
                         Text(
                           "Login With Google",
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .titleMedium,
                         ),
                       ],
                     ),

@@ -6,6 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 class ThemeManager {
   static final ThemeData light = ThemeData(
     primaryColor: ColorsManager.blue,
+    appBarTheme: AppBarTheme(
+        backgroundColor: ColorsManager.light,
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.roboto(
+            fontSize: 22,
+            color: ColorsManager.black
+        )
+    ),
     scaffoldBackgroundColor: ColorsManager.light,
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: ColorsManager.grey,
@@ -62,7 +70,16 @@ class ThemeManager {
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(foregroundColor: ColorsManager.blue),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: ColorsManager.blue,
+        side: BorderSide(
+          color: ColorsManager.blue,
+          style: BorderStyle.solid,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+      ),
     ),
     textTheme: TextTheme(
       bodySmall: GoogleFonts.inter(

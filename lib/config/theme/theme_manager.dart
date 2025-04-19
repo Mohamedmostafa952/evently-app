@@ -93,6 +93,16 @@ class ThemeManager {
           fontSize: 18.sp,
           color: ColorsManager.blue,
         ),
+        titleLarge: GoogleFonts.inter(
+            fontSize: 24.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.white
+        ),
+        titleSmall: GoogleFonts.inter(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.white
+        ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.transparent,
@@ -104,6 +114,9 @@ class ThemeManager {
       bottomAppBarTheme: BottomAppBarTheme(
         color: ColorsManager.blue,
         shape: CircularNotchedRectangle(),
+      ),
+      iconTheme: IconThemeData(
+          color: ColorsManager.white
       )
   );
   static final ThemeData dark = ThemeData(

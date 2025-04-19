@@ -34,15 +34,18 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     labelText: "Name",
                     prefixIcon: Icons.person,
+                    keyboardType: TextInputType.name,
                   ),
                   SizedBox(height: 16.h),
                   CustomTextFormField(
                     labelText: "Email",
                     prefixIcon: Icons.email,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   CustomTextFormField(
                     labelText: "Password",
+                    keyboardType: TextInputType.visiblePassword,
                     prefixIcon: Icons.lock,
                     suffixIcon: passwordObscure ? Icons.visibility_off : Icons
                         .visibility,
@@ -52,6 +55,7 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(height: 16.h),
                   CustomTextFormField(
                     labelText: "Re-Password",
+                    keyboardType: TextInputType.visiblePassword,
                     prefixIcon: Icons.lock,
                     suffixIcon: rePasswordObscure ? Icons.visibility_off : Icons
                         .visibility,

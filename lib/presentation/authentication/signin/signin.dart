@@ -35,11 +35,13 @@ class _SignInState extends State<SignIn> {
                   CustomTextFormField(
                     labelText: "Email",
                     prefixIcon: Icons.email,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   CustomTextFormField(
                     labelText: "Password",
                     prefixIcon: Icons.lock,
+                    keyboardType: TextInputType.visiblePassword,
                     isObscure: obscure,
                     suffixIcon:
                     obscure ? Icons.visibility_off : Icons.visibility,

@@ -8,6 +8,7 @@ class CustomTextFormField extends StatelessWidget {
     this.isObscure = false,
     this.suffixIcon,
     this.onClick,
+    this.keyboardType = TextInputType.text
   });
 
   final String labelText;
@@ -15,11 +16,13 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? suffixIcon;
   final bool isObscure;
   final VoidCallback? onClick;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: isObscure,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: labelText,
         prefixIcon: Icon(prefixIcon),

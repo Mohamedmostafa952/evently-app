@@ -1,6 +1,8 @@
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/resources/constants_manager.dart';
+import 'package:evently_app/core/widgets/custom_event.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
+import 'package:evently_app/data/DM/event_DM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,8 +15,8 @@ class Home extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-              color: ColorsManager.blue,
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r))
+            color: ColorsManager.blue,
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r)),
           ),
           child: SafeArea(
             child: Padding(
@@ -23,29 +25,44 @@ class Home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Welcome Back ✨", style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleSmall,),
-                  Text("Mohamed Mostafa", style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleLarge),
-                  SizedBox(height: 8.h,),
+                  Text(
+                    "Welcome Back ✨",
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  Text(
+                    "Mohamed Mostafa",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  SizedBox(height: 8.h),
                   Row(
                     children: [
                       Icon(Icons.location_on_outlined),
-                      Text(" Cairo, Egypt", style: Theme
-                          .of(context)
-                          .textTheme
-                          .titleSmall),
+                      Text(
+                        " Cairo, Egypt",
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
                     ],
                   ),
-                  SizedBox(height: 12.h,),
+                  SizedBox(height: 12.h),
                   CustomTabBar(categories: ConstantsManager.categories),
                 ],
               ),
             ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder:
+                (context, index) => CustomEvent(
+                  event: EventDm(
+                    category: "Birthday",
+                    title: "Meeting for Updating The Development Method ",
+                    description: "Meeting for Updating The Development Method ",
+                    date: DateTime.now(),
+                    time: TimeOfDay.now(),
+                  ),
+                ),
           ),
         ),
       ],

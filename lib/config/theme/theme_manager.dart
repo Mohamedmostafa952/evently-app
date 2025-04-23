@@ -15,6 +15,12 @@ class ThemeManager {
               color: ColorsManager.black
           )
       ),
+      cardTheme: CardThemeData(
+          color: ColorsManager.light,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r)
+          )
+      ),
       scaffoldBackgroundColor: ColorsManager.light,
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: ColorsManager.grey,
@@ -93,16 +99,26 @@ class ThemeManager {
           fontSize: 18.sp,
           color: ColorsManager.blue,
         ),
-        titleLarge: GoogleFonts.inter(
-            fontSize: 24.sp,
-            fontWeight: FontWeight.bold,
-            color: ColorsManager.white
-        ),
-        titleSmall: GoogleFonts.inter(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.bold,
-            color: ColorsManager.white
-        ),
+          titleLarge: GoogleFonts.inter(
+              fontSize: 24.sp,
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.white
+          ),
+          titleSmall: GoogleFonts.inter(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.white
+          ),
+          labelMedium: GoogleFonts.inter(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.blue
+          ),
+          labelSmall: GoogleFonts.inter(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.black
+          )
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.transparent,

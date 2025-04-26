@@ -4,9 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTabBar extends StatefulWidget {
-  const CustomTabBar({super.key, required this.categories});
+  const CustomTabBar({
+    super.key,
+    required this.categories,
+    required this.selectedTabBg,
+    required this.unselectedTabBg,
+    required this.selectedLabelBg,
+    required this.unselectedLabelBg,
+    this.verticalPadding = 0,
+  });
 
   final List<CategoryDM> categories;
+  final Color selectedTabBg;
+  final Color unselectedTabBg;
+  final Color selectedLabelBg;
+  final Color unselectedLabelBg;
+  final double verticalPadding;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -20,6 +33,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
     return DefaultTabController(
       length: widget.categories.length,
       child: TabBar(
+        padding: REdgeInsets.symmetric(vertical: widget.verticalPadding),
         isScrollable: true,
         labelPadding: REdgeInsets.symmetric(horizontal: 8),
         onTap: (newTabIndex) {
@@ -31,12 +45,16 @@ class _CustomTabBarState extends State<CustomTabBar> {
             widget.categories
                 .map(
                   (category) => CustomTab(
+                    selectedLabelBg: widget.selectedLabelBg,
+                    unselectedLabelBg: widget.unselectedLabelBg,
+                    selectedTabBg: widget.selectedTabBg,
+                    unselectedTabBg: widget.unselectedTabBg,
                     category: category,
                     isSelected:
                         widget.categories.indexOf(category) == selectedIndex,
                   ),
-                )
-                .toList(),
+        )
+            .toList(),
       ),
     );
   }

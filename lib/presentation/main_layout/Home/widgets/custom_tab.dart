@@ -1,4 +1,3 @@
-import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/data/DM/category_DM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,10 +9,18 @@ class CustomTab extends StatelessWidget {
     super.key,
     required this.category,
     required this.isSelected,
+    required this.selectedTabBg,
+    required this.unselectedTabBg,
+    required this.selectedLabelBg,
+    required this.unselectedLabelBg,
   });
 
   final CategoryDM category;
   final bool isSelected;
+  final Color selectedTabBg;
+  final Color unselectedTabBg;
+  final Color selectedLabelBg;
+  final Color unselectedLabelBg;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +28,15 @@ class CustomTab extends StatelessWidget {
       padding: REdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(46.r),
-        color: isSelected ? ColorsManager.light : ColorsManager.blue,
-        border: Border.all(color: ColorsManager.white, width: 1),
+        color: isSelected ? selectedTabBg : unselectedTabBg,
+        border: Border.all(color: selectedTabBg, width: 1),
       ),
       child: Row(
         children: [
           SvgPicture.asset(
             category.iconPath,
             colorFilter: ColorFilter.mode(
-              isSelected ? ColorsManager.blue : ColorsManager.white,
+              isSelected ? selectedLabelBg : unselectedLabelBg,
               BlendMode.srcIn,
             ),
           ),
@@ -37,7 +44,7 @@ class CustomTab extends StatelessWidget {
           Text(
             category.categoryName,
             style: GoogleFonts.inter(
-              color: isSelected ? ColorsManager.blue : ColorsManager.white,
+              color: isSelected ? selectedLabelBg : unselectedLabelBg,
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
             ),

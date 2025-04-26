@@ -11,8 +11,11 @@ class ThemeManager {
           backgroundColor: ColorsManager.light,
           centerTitle: true,
           titleTextStyle: GoogleFonts.roboto(
-              fontSize: 22,
-              color: ColorsManager.black
+              fontSize: 18.sp,
+              color: ColorsManager.blue
+          ),
+          iconTheme: IconThemeData(
+              color: ColorsManager.blue
           )
       ),
       cardTheme: CardThemeData(
@@ -132,7 +135,7 @@ class ThemeManager {
         shape: CircularNotchedRectangle(),
       ),
       iconTheme: IconThemeData(
-          color: ColorsManager.white
+          color: ColorsManager.black
       )
   );
   static final ThemeData dark = ThemeData(

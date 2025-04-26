@@ -36,7 +36,10 @@ class Home extends StatelessWidget {
                   SizedBox(height: 8.h),
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined),
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: ColorsManager.white,
+                      ),
                       Text(
                         " Cairo, Egypt",
                         style: Theme.of(context).textTheme.titleSmall,
@@ -44,7 +47,13 @@ class Home extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 12.h),
-                  CustomTabBar(categories: ConstantsManager.categories),
+                  CustomTabBar(
+                    categories: ConstantsManager.categories,
+                    selectedLabelBg: ColorsManager.blue,
+                    selectedTabBg: ColorsManager.light,
+                    unselectedLabelBg: ColorsManager.light,
+                    unselectedTabBg: ColorsManager.blue,
+                  ),
                 ],
               ),
             ),

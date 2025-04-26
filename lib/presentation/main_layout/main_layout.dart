@@ -1,5 +1,6 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
+import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/presentation/main_layout/Favorite/favorite.dart';
 import 'package:evently_app/presentation/main_layout/Home/home.dart';
 import 'package:evently_app/presentation/main_layout/Map/map.dart';
@@ -25,7 +26,9 @@ class _MainLayoutState extends State<MainLayout> {
       bottomNavigationBar: buildBottomNavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, RoutesManager.createEvent);
+        },
         shape: StadiumBorder(
           side: BorderSide(color: ColorsManager.white, width: 4),
         ),

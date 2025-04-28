@@ -112,16 +112,36 @@ class ThemeManager {
               fontWeight: FontWeight.bold,
               color: ColorsManager.white
           ),
-          labelMedium: GoogleFonts.inter(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: ColorsManager.blue
-          ),
-          labelSmall: GoogleFonts.inter(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.bold,
-              color: ColorsManager.black
-          )
+        labelMedium: GoogleFonts.inter(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.blue
+        ),
+        labelSmall: GoogleFonts.inter(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.black
+        ),
+        headlineMedium: GoogleFonts.inter(
+          color: ColorsManager.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 18.sp,
+        ),
+        headlineSmall: GoogleFonts.inter(
+          color: ColorsManager.white,
+          fontWeight: FontWeight.w500,
+          fontSize: 16.sp,
+        ),
+        displayMedium: GoogleFonts.inter(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorsManager.black
+        ),
+        displaySmall: GoogleFonts.inter(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w500,
+            color: ColorsManager.blue
+        ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.transparent,

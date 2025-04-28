@@ -9,6 +9,7 @@ class ImageAssets {
   static const String holiday = "assets/images/holiday.png";
   static const String meeting = "assets/images/meeting.png";
   static const String workshop = "assets/images/workshop.png";
+  static const String profilePic = "assets/images/profile_pic.png";
 }
 
 class SvgAssets {

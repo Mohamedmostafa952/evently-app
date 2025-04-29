@@ -5,6 +5,7 @@ import 'package:evently_app/core/widgets/custom_text_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:evently_app/presentation/authentication/widgets/custom_divder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -33,13 +34,13 @@ class _SignInState extends State<SignIn> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   CustomTextFormField(
-                    labelText: "Email",
+                    labelText: AppLocalizations.of(context)!.email,
                     prefixIcon: Icons.email,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   CustomTextFormField(
-                    labelText: "Password",
+                    labelText: AppLocalizations.of(context)!.password,
                     prefixIcon: Icons.lock,
                     keyboardType: TextInputType.visiblePassword,
                     isObscure: obscure,
@@ -47,39 +48,48 @@ class _SignInState extends State<SignIn> {
                     obscure ? Icons.visibility_off : Icons.visibility,
                     onClick: onClick,
                   ),
-                  CustomTextButton(text: "Forget Password?", onPress: () {},),
-                  CustomElevatedButton(text: "Login", onPress: () {}),
+                  CustomTextButton(
+                    text: AppLocalizations.of(context)!.forget_password,
+                    onPress: () {},),
+                  CustomElevatedButton(
+                      text: AppLocalizations.of(context)!.login,
+                      onPress: () {}),
                   SizedBox(height: 16.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don’t Have Account ? ",
+                        AppLocalizations.of(context)!.dont_have_account,
                         style: Theme
                             .of(context)
                             .textTheme
                             .bodySmall,
                       ),
-                      CustomTextButton(text: "Create Account", onPress: () {}),
+                      CustomTextButton(
+                          text: AppLocalizations.of(context)!.create_account,
+                          onPress: () {}),
                     ],
                   ),
                   SizedBox(height: 16.h),
-                  CustomDivider(text: "Or"),
+                  CustomDivider(text: AppLocalizations.of(context)!.or),
                   SizedBox(height: 32.h),
                   CustomOutlinedButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(SvgAssets.google),
-                        SizedBox(width: 6.w),
-                        Text(
-                          "Login With Google",
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleMedium,
-                        ),
-                      ],
+                    child: Padding(
+                      padding: REdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(SvgAssets.google),
+                          SizedBox(width: 6.w),
+                          Text(
+                            AppLocalizations.of(context)!.login_with_google,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .titleMedium,
+                          ),
+                        ],
+                      ),
                     ),
                     onPress: () {},
                   ),

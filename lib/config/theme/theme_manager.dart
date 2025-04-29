@@ -150,15 +150,180 @@ class ThemeManager {
           unselectedItemColor: ColorsManager.white,
           elevation: 0
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
-        color: ColorsManager.blue,
-        shape: CircularNotchedRectangle(),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: ColorsManager.blue,
+      shape: CircularNotchedRectangle(),
+    ),
+    iconTheme: IconThemeData(
+        color: ColorsManager.black
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: ColorsManager.blue,
+      foregroundColor: ColorsManager.white,
+      shape: StadiumBorder(
+        side: BorderSide(color: ColorsManager.white, width: 4),
       ),
-      iconTheme: IconThemeData(
-          color: ColorsManager.black
-      )
+    ),
   );
   static final ThemeData dark = ThemeData(
+    useMaterial3: false,
+    primaryColor: ColorsManager.dark,
+    appBarTheme: AppBarTheme(
+        backgroundColor: ColorsManager.dark,
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.roboto(
+            fontSize: 18.sp,
+            color: ColorsManager.blue
+        ),
+        iconTheme: IconThemeData(
+            color: ColorsManager.blue
+        )
+    ),
+    cardTheme: CardThemeData(
+        color: ColorsManager.dark,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.r)
+        )
+    ),
     scaffoldBackgroundColor: ColorsManager.dark,
+    inputDecorationTheme: InputDecorationTheme(
+      prefixIconColor: ColorsManager.offWhite,
+      suffixIconColor: ColorsManager.offWhite,
+      labelStyle: GoogleFonts.inter(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManager.offWhite,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide(width: 1.w, color: ColorsManager.blue),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide(width: 1.w, color: ColorsManager.blue),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide(width: 1.w, color: ColorsManager.blue),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide(width: 1.w, color: ColorsManager.red),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide(width: 1.w, color: ColorsManager.red),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.zero,
+        foregroundColor: ColorsManager.blue,
+        textStyle: GoogleFonts.inter(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+        backgroundColor: ColorsManager.blue,
+        foregroundColor: ColorsManager.white,
+        textStyle: GoogleFonts.inter(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: ColorsManager.blue,
+        side: BorderSide(
+          color: ColorsManager.blue,
+          style: BorderStyle.solid,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+      ),
+    ),
+    textTheme: TextTheme(
+      bodySmall: GoogleFonts.inter(
+        fontWeight: FontWeight.w500,
+        fontSize: 16.sp,
+        color: ColorsManager.offWhite,
+      ),
+      titleMedium: GoogleFonts.inter(
+        fontWeight: FontWeight.w500,
+        fontSize: 18.sp,
+        color: ColorsManager.offWhite,
+      ),
+      titleLarge: GoogleFonts.inter(
+          fontSize: 24.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.white
+      ),
+      titleSmall: GoogleFonts.inter(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.offWhite
+      ),
+      labelMedium: GoogleFonts.inter(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.blue
+      ),
+      labelSmall: GoogleFonts.inter(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.offWhite
+      ),
+      headlineMedium: GoogleFonts.inter(
+        color: ColorsManager.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 18.sp,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        color: ColorsManager.white,
+        fontWeight: FontWeight.w500,
+        fontSize: 16.sp,
+      ),
+      displayMedium: GoogleFonts.inter(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsManager.offWhite
+      ),
+      displaySmall: GoogleFonts.inter(
+          fontSize: 18.sp,
+          fontWeight: FontWeight.w500,
+          color: ColorsManager.blue
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.transparent,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: ColorsManager.offWhite,
+        unselectedItemColor: ColorsManager.offWhite,
+        elevation: 0
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: ColorsManager.dark,
+      shape: CircularNotchedRectangle(),
+    ),
+    iconTheme: IconThemeData(
+        color: ColorsManager.offWhite
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: ColorsManager.black,
+      foregroundColor: ColorsManager.offWhite,
+      shape: StadiumBorder(
+        side: BorderSide(color: ColorsManager.offWhite, width: 4),
+      ),
+    ),
   );
 }

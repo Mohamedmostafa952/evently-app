@@ -4,6 +4,7 @@ import 'package:evently_app/core/widgets/custom_event.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/data/DM/event_DM.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Home extends StatelessWidget {
@@ -15,7 +16,7 @@ class Home extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: ColorsManager.blue,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r)),
           ),
           child: SafeArea(
@@ -26,7 +27,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Welcome Back ✨",
+                    AppLocalizations.of(context)!.welcome_back,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(

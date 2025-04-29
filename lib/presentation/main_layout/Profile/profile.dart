@@ -2,6 +2,7 @@ import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/widgets/custom_drop_down_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Profile extends StatefulWidget {
@@ -12,7 +13,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   String selectedLang = "English";
   String selectedTheme = "Light";
 
@@ -23,7 +23,9 @@ class _ProfileState extends State<Profile> {
         Container(
           height: 150.h,
           decoration: BoxDecoration(
-            color: ColorsManager.blue,
+            color: Theme
+                .of(context)
+                .primaryColor,
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(28.r)),
           ),
           child: SafeArea(
@@ -46,7 +48,7 @@ class _ProfileState extends State<Profile> {
                               .textTheme
                               .headlineMedium,
                         ),
-                        SizedBox(height: 10.h,),
+                        SizedBox(height: 10.h),
                         Text(
                           "mohamedmostafa@email.com",
                           style: Theme
@@ -67,16 +69,51 @@ class _ProfileState extends State<Profile> {
           child: Column(
             children: [
               CustomDropDownMenu(
-                title: "Language",
+                title: AppLocalizations.of(context)!.language,
                 textView: selectedLang,
                 menuItems: ["English", "عربي"],
-                onChange: onLangChange,),
-              SizedBox(height: 16.h,),
-              CustomDropDownMenu(title: "Theme",
+                onChange: onLangChange,
+              ),
+              SizedBox(height: 16.h),
+              CustomDropDownMenu(
+                title: AppLocalizations.of(context)!.theme,
                 textView: selectedTheme,
-                menuItems: ["Light", "Dark"],
-                onChange: onThemeChange,),
+                menuItems: [
+                  AppLocalizations.of(context)!.light,
+                  AppLocalizations.of(context)!.dark
+                ],
+                onChange: onThemeChange,
+              ),
             ],
+          ),
+        ),
+        Spacer(),
+        Padding(
+          padding: REdgeInsets.symmetric(vertical: 28, horizontal: 16),
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                backgroundColor: ColorsManager.red,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14.r)
+                )
+            ),
+            child: Padding(
+              padding: REdgeInsets.all(12.0),
+              child: Row(
+                children: [
+                  Icon(Icons.logout_outlined),
+                  SizedBox(width: 8),
+                  Text(AppLocalizations.of(context)!.logout, style: Theme
+                      .of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(
+                      fontWeight: FontWeight.w500
+                  ),),
+                ],
+              ),
+            ),
           ),
         ),
       ],
@@ -85,15 +122,11 @@ class _ProfileState extends State<Profile> {
 
   void onThemeChange(String? newTheme) {
     selectedTheme = newTheme!;
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   void onLangChange(String? newLang) {
     selectedLang = newLang!;
-    setState(() {
-
-    });
+    setState(() {});
   }
 }

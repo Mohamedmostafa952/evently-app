@@ -3,6 +3,7 @@ import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUp extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.register)),
       body: Column(
         children: [
           Expanded(flex: 1, child: Image.asset(ImageAssets.eventlyLogo)),
@@ -28,56 +29,64 @@ class _SignUpState extends State<SignUp> {
             flex: 4,
             child: Padding(
               padding: REdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  CustomTextFormField(
-                    labelText: "Name",
-                    prefixIcon: Icons.person,
-                    keyboardType: TextInputType.name,
-                  ),
-                  SizedBox(height: 16.h),
-                  CustomTextFormField(
-                    labelText: "Email",
-                    prefixIcon: Icons.email,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: 16.h),
-                  CustomTextFormField(
-                    labelText: "Password",
-                    keyboardType: TextInputType.visiblePassword,
-                    prefixIcon: Icons.lock,
-                    suffixIcon: passwordObscure ? Icons.visibility_off : Icons
-                        .visibility,
-                    isObscure: passwordObscure,
-                    onClick: onPasswordClick,
-                  ),
-                  SizedBox(height: 16.h),
-                  CustomTextFormField(
-                    labelText: "Re-Password",
-                    keyboardType: TextInputType.visiblePassword,
-                    prefixIcon: Icons.lock,
-                    suffixIcon: rePasswordObscure ? Icons.visibility_off : Icons
-                        .visibility,
-                    isObscure: rePasswordObscure,
-                    onClick: onRePasswordClick,
-                  ),
-                  SizedBox(height: 16.h),
-                  CustomElevatedButton(text: "Sign Up", onPress: () {}),
-                  SizedBox(height: 16.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Already Have Account ?", style: Theme
-                          .of(context)
-                          .textTheme
-                          .bodySmall,),
-                      CustomTextButton(text: "Login",
-                        onPress: () {},
-                        alignment: Alignment.center,)
-                    ],
-                  )
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomTextFormField(
+                      labelText: AppLocalizations.of(context)!.name,
+                      prefixIcon: Icons.person,
+                      keyboardType: TextInputType.name,
+                    ),
+                    SizedBox(height: 16.h),
+                    CustomTextFormField(
+                      labelText: AppLocalizations.of(context)!.email,
+                      prefixIcon: Icons.email,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: 16.h),
+                    CustomTextFormField(
+                      labelText: AppLocalizations.of(context)!.password,
+                      keyboardType: TextInputType.visiblePassword,
+                      prefixIcon: Icons.lock,
+                      suffixIcon: passwordObscure ? Icons.visibility_off : Icons
+                          .visibility,
+                      isObscure: passwordObscure,
+                      onClick: onPasswordClick,
+                    ),
+                    SizedBox(height: 16.h),
+                    CustomTextFormField(
+                      labelText: AppLocalizations.of(context)!.re_password,
+                      keyboardType: TextInputType.visiblePassword,
+                      prefixIcon: Icons.lock,
+                      suffixIcon: rePasswordObscure
+                          ? Icons.visibility_off
+                          : Icons
+                          .visibility,
+                      isObscure: rePasswordObscure,
+                      onClick: onRePasswordClick,
+                    ),
+                    SizedBox(height: 16.h),
+                    CustomElevatedButton(
+                        text: AppLocalizations.of(context)!.signup,
+                        onPress: () {}),
+                    SizedBox(height: 16.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(AppLocalizations.of(context)!.already_have_account,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodySmall,),
+                        CustomTextButton(
+                          text: AppLocalizations.of(context)!.login,
+                          onPress: () {},
+                          alignment: Alignment.center,)
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

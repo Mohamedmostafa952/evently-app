@@ -1,3 +1,4 @@
+import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,9 +15,12 @@ class EventTitle extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Text(title, style: Theme.of(context).textTheme.labelSmall),
+              child: Text(title, style: Theme
+                  .of(context)
+                  .textTheme
+                  .labelSmall),
             ),
-            Icon(Icons.favorite, color: Theme.of(context).primaryColor),
+            Icon(Icons.favorite_outline_sharp, color: ColorsManager.blue,),
           ],
         ),
       ),

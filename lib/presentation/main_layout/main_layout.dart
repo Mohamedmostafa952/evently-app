@@ -1,11 +1,11 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
-import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/presentation/main_layout/Favorite/favorite.dart';
 import 'package:evently_app/presentation/main_layout/Home/home.dart';
 import 'package:evently_app/presentation/main_layout/Map/map.dart';
 import 'package:evently_app/presentation/main_layout/Profile/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MainLayout extends StatefulWidget {
@@ -29,9 +29,6 @@ class _MainLayoutState extends State<MainLayout> {
         onPressed: () {
           Navigator.pushNamed(context, RoutesManager.createEvent);
         },
-        shape: StadiumBorder(
-          side: BorderSide(color: ColorsManager.white, width: 4),
-        ),
         child: Icon(Icons.add),
       ),
     );
@@ -50,22 +47,22 @@ class _MainLayoutState extends State<MainLayout> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.home),
             activeIcon: SvgPicture.asset(SvgAssets.selectedHome),
-            label: "Home",
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.map),
             activeIcon: SvgPicture.asset(SvgAssets.selectedMap),
-            label: "Map",
+            label: AppLocalizations.of(context)!.map,
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.fav),
             activeIcon: SvgPicture.asset(SvgAssets.selectedFav),
-            label: "Favorite",
+            label: AppLocalizations.of(context)!.favorite,
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.profile),
             activeIcon: SvgPicture.asset(SvgAssets.selectedProfile),
-            label: "Profile",
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
       ),

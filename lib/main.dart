@@ -1,6 +1,11 @@
 import 'package:evently_app/evently_app.dart';
+import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const EventlyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => ConfigProvider(),
+      // creates object from ConfigProvider
+      child: const EventlyApp()));
 }

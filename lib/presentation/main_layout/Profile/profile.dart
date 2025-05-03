@@ -1,9 +1,11 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/widgets/custom_drop_down_menu.dart';
+import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -13,11 +15,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String selectedLang = "English";
-  String selectedTheme = "Light";
+  late ConfigProvider configProvider;
 
   @override
   Widget build(BuildContext context) {
+    configProvider = Provider.of<ConfigProvider>(context);
     return Column(
       children: [
         Container(
@@ -70,14 +72,15 @@ class _ProfileState extends State<Profile> {
             children: [
               CustomDropDownMenu(
                 title: AppLocalizations.of(context)!.language,
-                textView: selectedLang,
+                textView: configProvider.isEnglish ? "English" : "عربي",
                 menuItems: ["English", "عربي"],
                 onChange: onLangChange,
               ),
               SizedBox(height: 16.h),
               CustomDropDownMenu(
                 title: AppLocalizations.of(context)!.theme,
-                textView: selectedTheme,
+                textView: configProvider.isDark ? AppLocalizations.of(context)!
+                    .dark : AppLocalizations.of(context)!.light,
                 menuItems: [
                   AppLocalizations.of(context)!.light,
                   AppLocalizations.of(context)!.dark
@@ -121,12 +124,14 @@ class _ProfileState extends State<Profile> {
   }
 
   void onThemeChange(String? newTheme) {
-    selectedTheme = newTheme!;
-    setState(() {});
+    ThemeMode theme = newTheme == AppLocalizations.of(context)!.light
+        ? ThemeMode.light
+        : ThemeMode.dark;
+    configProvider.changeAppTheme(theme);
   }
 
   void onLangChange(String? newLang) {
-    selectedLang = newLang!;
-    setState(() {});
+    String lang = newLang == "English" ? "en" : "ar";
+    configProvider.changeAppLang(lang);
   }
 }

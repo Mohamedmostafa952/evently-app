@@ -12,6 +12,7 @@ class CustomTabBar extends StatefulWidget {
     required this.selectedLabelBg,
     required this.unselectedLabelBg,
     this.verticalPadding = 0,
+    required this.onCategoryTabClicked,
   });
 
   final List<CategoryDM> categories;
@@ -20,6 +21,7 @@ class CustomTabBar extends StatefulWidget {
   final Color selectedLabelBg;
   final Color unselectedLabelBg;
   final double verticalPadding;
+  final void Function(CategoryDM) onCategoryTabClicked;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -37,6 +39,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
         isScrollable: true,
         labelPadding: REdgeInsets.symmetric(horizontal: 8),
         onTap: (newTabIndex) {
+          widget.onCategoryTabClicked(widget.categories[newTabIndex]);
           selectedIndex = newTabIndex;
           setState(() {});
         },

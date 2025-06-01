@@ -6,27 +6,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EventlyApp extends StatelessWidget {
+class EventlyApp extends StatefulWidget {
   const EventlyApp({super.key});
 
   @override
+  State<EventlyApp> createState() => _EventlyAppState();
+}
+
+class _EventlyAppState extends State<EventlyApp> {
+  bool? isFirstTime;
+  bool? isFirstTimeToLogin;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // displayingOnboardingOnce();
+    // alreadyLogged();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // if (isFirstTime == null || isFirstTimeToLogin == null) {
+    //   // Show loading screen or placeholder
+    //   return const MaterialApp(home: Scaffold(body: Center(child: CircularProgressIndicator())));
+    // }
     var configProvider = Provider.of<ConfigProvider>(
-        context); // look at parent (config provider)
+      context,
+    ); // look at parent (config provider)
     return ScreenUtilInit(
       designSize: Size(context.getScreenWidth, context.getScreenHeight),
       minTextAdapt: true,
       splitScreenMode: true,
       builder:
-          (_, _) =>
-          MaterialApp(
+          (_, _) => MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeManager.light,
             darkTheme: ThemeManager.dark,
             themeMode: configProvider.currentTheme,
             onGenerateRoute: RoutesManager.routes,
-            initialRoute: RoutesManager.mainLayout,
+            initialRoute: RoutesManager.startingScreen,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             // [
             //               AppLocalizations.delegate,
@@ -41,5 +62,25 @@ class EventlyApp extends StatelessWidget {
             locale: Locale(configProvider.currentLang),
           ),
     );
+  }
+
+  //isFirstTime!
+  //                 ? RoutesManager.startingScreen
+  //                 : isFirstTimeToLogin! ? RoutesManager.signIn : RoutesManager.mainLayout
+
+  void displayingOnboardingOnce() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool firstTime = prefs.getBool("firstTime") ?? true;
+    setState(() {
+      isFirstTime = firstTime;
+    });
+  }
+
+  void alreadyLogged() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool firstTimeToLogin = prefs.getBool("isFirstTimeToLogin") ?? true;
+    setState(() {
+      isFirstTimeToLogin = firstTimeToLogin;
+    });
   }
 }

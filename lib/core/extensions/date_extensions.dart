@@ -5,4 +5,14 @@ extension DateFormate on DateTime {
     DateFormat formatter = DateFormat("MMMM");
     return formatter.format(this);
   }
+
+  String get toFormattedYear {
+    DateFormat formatter = DateFormat("dd-MM-yyyy");
+    return formatter.format(this);
+  }
+
+  String get getTimeFormatted {
+    DateFormat formatter = DateFormat("hh:mm");
+    return formatter.format(this);
+  }
 }

@@ -1,6 +1,10 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
+import 'package:evently_app/core/resources/dialog_utils.dart';
+import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/core/widgets/custom_drop_down_menu.dart';
+import 'package:evently_app/data/DM/user_DM.dart';
+import 'package:evently_app/data/firebase_services/firebase_services.dart';
 import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,7 +48,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Mohamed Mostafa",
+                          UserDm.currentUser!.name,
                           style: Theme
                               .of(context)
                               .textTheme
@@ -52,7 +56,7 @@ class _ProfileState extends State<Profile> {
                         ),
                         SizedBox(height: 10.h),
                         Text(
-                          "mohamedmostafa@email.com",
+                          UserDm.currentUser!.email,
                           style: Theme
                               .of(context)
                               .textTheme
@@ -94,7 +98,7 @@ class _ProfileState extends State<Profile> {
         Padding(
           padding: REdgeInsets.symmetric(vertical: 28, horizontal: 16),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: logout,
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorsManager.red,
                 shape: RoundedRectangleBorder(
@@ -119,6 +123,7 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ),
+        SizedBox(height: 10.8,)
       ],
     );
   }
@@ -133,5 +138,17 @@ class _ProfileState extends State<Profile> {
   void onLangChange(String? newLang) {
     String lang = newLang == "English" ? "en" : "ar";
     configProvider.changeAppLang(lang);
+  }
+
+  logout() {
+    DialogUtils.showMessageDialog(
+        context, message: "Are you sure you want to logout?",
+        posAction: () async {
+          await FirebaseServices.logout().then((_) {
+            Navigator.pushNamed(context, RoutesManager.signIn);
+          });
+        },
+        posActionTitle: "Yes",
+        negActionTitle: "No");
   }
 }

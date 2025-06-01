@@ -1,4 +1,3 @@
-import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/widgets/event_date.dart';
 import 'package:evently_app/core/widgets/event_title.dart';
@@ -7,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomEvent extends StatelessWidget {
-  const CustomEvent({super.key, required this.event});
+  const CustomEvent({super.key, required this.event, required this.favEvent});
 
   final EventDm event;
-
+  final bool favEvent;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,15 +21,15 @@ class CustomEvent extends StatelessWidget {
         border: Border.all(color: ColorsManager.blue, width: 1),
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage(ImageAssets.birthday),
+          image: AssetImage(event.category.imagePath),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          EventDate(date: event.date),
+          EventDate(date: event.dateTime),
           Spacer(),
-          EventTitle(title: event.title),
+          EventTitle(event: event, favEvent: favEvent,),
         ],
       ),
     );

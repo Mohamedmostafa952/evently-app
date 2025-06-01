@@ -6,7 +6,7 @@ class ConstantsManager {
     CategoryDM(
       id: "0",
       categoryName: "All",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.all,
       imagePath: ImageAssets.sports,
     ),
     CategoryDM(
@@ -24,43 +24,43 @@ class ConstantsManager {
     CategoryDM(
       id: "3",
       categoryName: "Meeting",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.meeting,
       imagePath: ImageAssets.meeting,
     ),
     CategoryDM(
       id: "4",
       categoryName: "Gaming",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.gaming,
       imagePath: ImageAssets.gaming,
     ),
     CategoryDM(
       id: "5",
       categoryName: "Eating",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.eating,
       imagePath: ImageAssets.eating,
     ),
     CategoryDM(
       id: "6",
       categoryName: "Holiday",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.holiday,
       imagePath: ImageAssets.holiday,
     ),
     CategoryDM(
       id: "7",
       categoryName: "Exhibition",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.exhibition,
       imagePath: ImageAssets.exhibition,
     ),
     CategoryDM(
       id: "8",
       categoryName: "Workshop",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.workshop,
       imagePath: ImageAssets.workshop,
     ),
     CategoryDM(
       id: "9",
       categoryName: "BookClub",
-      iconPath: SvgAssets.sports,
+      iconPath: SvgAssets.book,
       imagePath: ImageAssets.bookClub,
     ),
   ];

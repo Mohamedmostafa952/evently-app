@@ -35,6 +35,8 @@ class CustomTab extends StatelessWidget {
         children: [
           SvgPicture.asset(
             category.iconPath,
+            width: 24.w,
+            height: 24.h,
             colorFilter: ColorFilter.mode(
               isSelected ? selectedLabelBg : unselectedLabelBg,
               BlendMode.srcIn,

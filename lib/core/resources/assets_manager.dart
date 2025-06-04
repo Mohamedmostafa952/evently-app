@@ -19,6 +19,7 @@ class ImageAssets {
   static const String english = "assets/icons/english_icon.png";
   static const String light = "assets/icons/light_icon.png";
   static const String dark = "assets/icons/dark_icon.png";
+  static const String resetPassword = "assets/images/reset_password.png";
 }
 
 class SvgAssets {

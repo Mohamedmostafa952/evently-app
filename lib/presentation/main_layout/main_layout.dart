@@ -1,9 +1,12 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/routes_manager/routes_manager.dart';
+import 'package:evently_app/data/DM/user_DM.dart';
+import 'package:evently_app/data/firebase_services/firebase_services.dart';
 import 'package:evently_app/presentation/main_layout/Favorite/favorite.dart';
 import 'package:evently_app/presentation/main_layout/Home/home.dart';
 import 'package:evently_app/presentation/main_layout/Map/map.dart';
 import 'package:evently_app/presentation/main_layout/Profile/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,12 +20,39 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int currentIndex = 0;
+
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
+  Future<void> loadUserData() async {
+    if (UserDm.currentUser == null) {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        UserDm.currentUser = await FirebaseServices.getUserFromFireStore(
+          user.uid,
+        );
+      }
+    }
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   List<Widget> tabs = [Home(), Maps(), Favorite(), Profile()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[currentIndex],
+      body: isLoading
+          ? Center(child: CircularProgressIndicator(),)
+          : tabs[currentIndex],
       bottomNavigationBar: buildBottomNavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(

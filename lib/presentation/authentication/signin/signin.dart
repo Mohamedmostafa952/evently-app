@@ -6,7 +6,6 @@ import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_outlined_button.dart';
 import 'package:evently_app/core/widgets/custom_text_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
-import 'package:evently_app/data/DM/user_DM.dart';
 import 'package:evently_app/data/firebase_services/firebase_services.dart';
 import 'package:evently_app/presentation/authentication/widgets/custom_divder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -100,7 +98,10 @@ class _SignInState extends State<SignIn> {
                       ),
                       CustomTextButton(
                         text: AppLocalizations.of(context)!.forget_password,
-                        onPress: () {},
+                        onPress: () {
+                          Navigator.pushNamed(context,
+                              RoutesManager.resetPassword);
+                        },
                       ),
                       CustomElevatedButton(
                         text: AppLocalizations.of(context)!.login,
@@ -130,6 +131,7 @@ class _SignInState extends State<SignIn> {
                       CustomDivider(text: AppLocalizations.of(context)!.or),
                       SizedBox(height: 16.h),
                       CustomOutlinedButton(
+                        onPress: loginWithGoogle,
                         child: Padding(
                           padding: REdgeInsets.all(16),
                           child: Row(
@@ -144,7 +146,6 @@ class _SignInState extends State<SignIn> {
                             ],
                           ),
                         ),
-                        onPress: () {},
                       ),
                     ],
                   ),
@@ -196,5 +197,18 @@ class _SignInState extends State<SignIn> {
         title: "Error",
       );
     }
+  }
+
+  void loginWithGoogle() async {
+    DialogUtils.showLoadingDialog("Loading....", context);
+    await FirebaseServices.loginWithGoogle(context);
+    DialogUtils.showMessageDialog(
+      context,
+      message: "Login with google successfully",
+      posActionTitle: "ok",
+      posAction: () {
+        Navigator.pushNamed(context, RoutesManager.mainLayout);
+      },
+    );
   }
 }

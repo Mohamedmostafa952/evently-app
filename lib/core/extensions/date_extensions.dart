@@ -12,7 +12,7 @@ extension DateFormate on DateTime {
   }
 
   String get getTimeFormatted {
-    DateFormat formatter = DateFormat("hh:mm");
+    DateFormat formatter = DateFormat("hh:mm a");
     return formatter.format(this);
   }
 }

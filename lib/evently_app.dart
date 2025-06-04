@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class EventlyApp extends StatefulWidget {
   const EventlyApp({super.key});
@@ -17,15 +16,8 @@ class EventlyApp extends StatefulWidget {
 
 class _EventlyAppState extends State<EventlyApp> {
   bool? isFirstTime;
-  bool? isFirstTimeToLogin;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // displayingOnboardingOnce();
-    // alreadyLogged();
-  }
+  // bool? isFirstTimeToLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +39,7 @@ class _EventlyAppState extends State<EventlyApp> {
             darkTheme: ThemeManager.dark,
             themeMode: configProvider.currentTheme,
             onGenerateRoute: RoutesManager.routes,
-            initialRoute: RoutesManager.startingScreen,
+            home: RoutesManager.alreadyLogin(),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             // [
             //               AppLocalizations.delegate,
@@ -68,19 +60,19 @@ class _EventlyAppState extends State<EventlyApp> {
   //                 ? RoutesManager.startingScreen
   //                 : isFirstTimeToLogin! ? RoutesManager.signIn : RoutesManager.mainLayout
 
-  void displayingOnboardingOnce() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool firstTime = prefs.getBool("firstTime") ?? true;
-    setState(() {
-      isFirstTime = firstTime;
-    });
-  }
+  // void displayingOnboardingOnce() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool firstTime = prefs.getBool("firstTime") ?? true;
+  //   setState(() {
+  //     isFirstTime = firstTime;
+  //   });
+  // }
 
-  void alreadyLogged() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool firstTimeToLogin = prefs.getBool("isFirstTimeToLogin") ?? true;
-    setState(() {
-      isFirstTimeToLogin = firstTimeToLogin;
-    });
-  }
+  // void alreadyLogged() async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   bool firstTimeToLogin = prefs.getBool("isFirstTimeToLogin") ?? true;
+//   setState(() {
+//     isFirstTimeToLogin = firstTimeToLogin;
+//   });
+// }
 }

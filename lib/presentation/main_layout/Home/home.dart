@@ -1,5 +1,6 @@
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/resources/constants_manager.dart';
+import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/core/widgets/custom_event.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/data/DM/category_DM.dart';
@@ -38,12 +39,11 @@ class _HomeState extends State<Home> {
             child: Padding(
               padding: REdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             AppLocalizations.of(context)!.welcome_back,
@@ -136,10 +136,17 @@ class _HomeState extends State<Home> {
                 itemCount: events.length,
                 itemBuilder:
                     (context, index) =>
-                    CustomEvent(
-                      event: events[index],
-                      favEvent: UserDm.currentUser!.favEventsIds.contains(
-                        events[index].id,
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RoutesManager.eventDetails,
+                                arguments: events[index]);
+                          },
+                          child: CustomEvent(
+                            event: events[index],
+                            favEvent: UserDm.currentUser!.favEventsIds.contains(
+                              events[index].id,
+                            ),
                       ),
                     ),
               ),

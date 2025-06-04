@@ -10,9 +10,11 @@ class EventDm {
   final DateTime dateTime;
   final double? lat;
   final double? lng;
+  final String userId;
 
   EventDm({
     this.id = "",
+    required this.userId,
     required this.category,
     required this.title,
     required this.description,
@@ -23,17 +25,19 @@ class EventDm {
 
   // used when receiving date
   // receive category id so we can get its category object
-  EventDm.fromJson(Map<String, dynamic> json) : this(
+  EventDm.fromJson(Map<String, dynamic> json)
+      : this(
     id: json["id"],
+    userId: json["userId"],
     title: json["title"],
     description: json["description"],
     dateTime: (json["dateTime"] as Timestamp).toDate(),
-    category: ConstantsManager.categoriesWithoutAll.firstWhere((
-        category) => category.id == json["categoryID"]),
+    category: ConstantsManager.categoriesWithoutAll.firstWhere(
+          (category) => category.id == json["categoryID"],
+    ),
     lat: json["lat"] ?? 0,
     lng: json["lng"] ?? 0,
   );
-
 
   // convert object to json
   // used when sending data
@@ -47,5 +51,6 @@ class EventDm {
         "dateTime": Timestamp.fromDate(dateTime),
         "lat": lat,
         "lang": lng,
+        "userId": userId
       };
 }

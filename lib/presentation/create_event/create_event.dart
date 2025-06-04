@@ -2,6 +2,7 @@ import 'package:evently_app/core/extensions/date_extensions.dart';
 import 'package:evently_app/core/extensions/string_extension.dart';
 import 'package:evently_app/core/resources/colors_manager/colors_manager.dart';
 import 'package:evently_app/core/resources/constants_manager.dart';
+import 'package:evently_app/core/resources/dialog_utils.dart';
 import 'package:evently_app/core/routes_manager/routes_manager.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
@@ -9,6 +10,7 @@ import 'package:evently_app/core/widgets/custom_text_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:evently_app/data/DM/category_DM.dart';
 import 'package:evently_app/data/DM/event_DM.dart';
+import 'package:evently_app/data/DM/user_DM.dart';
 import 'package:evently_app/data/firebase_services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,7 +18,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CreateEvent extends StatefulWidget {
-  const CreateEvent({super.key});
+  const CreateEvent({super.key, this.event});
+
+  final EventDm? event;
 
   @override
   State<CreateEvent> createState() => _CreateEventState();
@@ -37,6 +41,21 @@ class _CreateEventState extends State<CreateEvent> {
     super.initState();
     titleController = TextEditingController();
     descriptionController = TextEditingController();
+    initEditData();
+  }
+
+  initEditData() {
+    if (widget.event != null) {
+      titleController.text = widget.event!.title;
+      descriptionController.text = widget.event!.description;
+      selectedCategory = widget.event!.category;
+      selectedDate = widget.event!.dateTime;
+      selectedTime = TimeOfDay(
+        hour: widget.event!.dateTime.hour,
+        minute: widget.event!.dateTime.minute,
+      );
+      location = LatLng(widget.event!.lat!, widget.event!.lng!);
+    }
   }
 
   @override
@@ -50,7 +69,13 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.create_event)),
+      appBar: AppBar(
+        title: Text(
+          widget.event == null
+              ? AppLocalizations.of(context)!.create_event
+              : "Update event",
+        ),
+      ),
       body: Padding(
         padding: REdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -65,6 +90,9 @@ class _CreateEventState extends State<CreateEvent> {
                   child: Image.asset(selectedCategory.imagePath),
                 ),
                 CustomTabBar(
+                  initialIndex: ConstantsManager.categoriesWithoutAll.indexOf(
+                    selectedCategory,
+                  ),
                   categories: ConstantsManager.categoriesWithoutAll,
                   selectedLabelBg: ColorsManager.light,
                   selectedTabBg: ColorsManager.blue,
@@ -75,10 +103,7 @@ class _CreateEventState extends State<CreateEvent> {
                 ),
                 Text(
                   AppLocalizations.of(context)!.title,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodySmall,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 SizedBox(height: 8.h),
                 CustomTextFormField(
@@ -90,10 +115,7 @@ class _CreateEventState extends State<CreateEvent> {
                 SizedBox(height: 16.h),
                 Text(
                   AppLocalizations.of(context)!.description,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodySmall,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 SizedBox(height: 8.h),
                 CustomTextFormField(
@@ -110,10 +132,7 @@ class _CreateEventState extends State<CreateEvent> {
                     Expanded(
                       child: Text(
                         selectedDate.toFormattedYear,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     CustomTextButton(
@@ -129,10 +148,7 @@ class _CreateEventState extends State<CreateEvent> {
                     Expanded(
                       child: Text(
                         selectedDate.getTimeFormatted,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     CustomTextButton(
@@ -178,15 +194,12 @@ class _CreateEventState extends State<CreateEvent> {
                       ),
                       SizedBox(width: 6.w),
                       Expanded(
+                        flex: 9,
                         child: Text(
                           location != null
-                              ? "${location!.latitude} , ${location!
-                              .longitude} "
+                              ? "${location!.latitude} , ${location!.longitude} "
                               : "Choose Event Location",
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleMedium,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
                       Spacer(),
@@ -196,8 +209,11 @@ class _CreateEventState extends State<CreateEvent> {
                 ),
                 SizedBox(height: 16.h),
                 CustomElevatedButton(
-                  text: AppLocalizations.of(context)!.add_event,
-                  onPress: _createEvent,
+                  text:
+                      widget.event == null
+                          ? AppLocalizations.of(context)!.add_event
+                          : "update event",
+                  onPress: widget.event == null ? _createEvent : updateEvent,
                 ),
               ],
             ),
@@ -217,21 +233,52 @@ class _CreateEventState extends State<CreateEvent> {
     if (!formKey.currentState!.validate()) return;
     try {
       EventDm eventDm = EventDm(
-          category: selectedCategory,
-          title: titleController.text,
-          description: descriptionController.text,
-          dateTime: selectedDate.copyWith(
-            hour: selectedTime.hour,
-            minute: selectedTime.minute,
-          ),
-          lat: location!.latitude,
-          lng: location!.longitude
+        userId: UserDm.currentUser!.id,
+        category: selectedCategory,
+        title: titleController.text,
+        description: descriptionController.text,
+        dateTime: selectedDate.copyWith(
+          hour: selectedTime.hour,
+          minute: selectedTime.minute,
+        ),
+        lat: location!.latitude,
+        lng: location!.longitude,
       );
       await FirebaseServices.addEventsToFireStore(eventDm);
       Navigator.pop(context);
     } catch (exception) {
       print(exception.toString());
     }
+  }
+
+  updateEvent() async {
+    if (!formKey.currentState!.validate()) return;
+
+    EventDm event = EventDm(
+      id: widget.event!.id,
+      userId: UserDm.currentUser!.id,
+      category: selectedCategory,
+      title: titleController.text,
+      description: descriptionController.text,
+      dateTime: selectedDate.copyWith(
+        hour: selectedTime.hour,
+        minute: selectedTime.minute,
+      ),
+      lat: location!.latitude,
+      lng: location!.longitude,
+    );
+    DialogUtils.showLoadingDialog("loading...", context);
+    await FirebaseServices.updateEventData(event);
+    DialogUtils.hideDialog(context);
+    DialogUtils.showMessageDialog(
+      context,
+      message: "Are you sure you want to update this event",
+      posActionTitle: "yes",
+      posAction: () {
+        Navigator.pushNamed(context, RoutesManager.mainLayout);
+      },
+      negActionTitle: "No",
+    );
   }
 
   void _showEventDate() async {
@@ -241,7 +288,7 @@ class _CreateEventState extends State<CreateEvent> {
           firstDate: DateTime.now(),
           lastDate: DateTime.now().add(Duration(days: 365)),
         ) ??
-            selectedDate;
+        selectedDate;
 
     setState(() {});
   }
@@ -249,7 +296,7 @@ class _CreateEventState extends State<CreateEvent> {
   void _showEventTime() async {
     selectedTime =
         await showTimePicker(context: context, initialTime: TimeOfDay.now()) ??
-            selectedTime;
+        selectedTime;
 
     selectedDate = selectedDate.copyWith(
       hour: selectedTime.hour,
@@ -259,18 +306,14 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   String? onTitleValidate(String? input) {
-    if (input == null || input
-        .trim()
-        .isEmpty) {
+    if (input == null || input.trim().isEmpty) {
       return "Please enter event title";
     }
     return null;
   }
 
   String? onDescriptionValidate(String? input) {
-    if (input == null || input
-        .trim()
-        .isEmpty) {
+    if (input == null || input.trim().isEmpty) {
       return "Please enter event Description";
     }
     if (input.getStringWithoutSpaces.length < 6) {

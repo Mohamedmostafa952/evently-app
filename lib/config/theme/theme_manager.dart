@@ -142,6 +142,11 @@ class ThemeManager {
             fontWeight: FontWeight.w500,
             color: ColorsManager.blue
         ),
+          bodyMedium: GoogleFonts.inter(
+              fontSize: 24.sp,
+              fontWeight: FontWeight.w500,
+              color: ColorsManager.blue
+          )
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.transparent,

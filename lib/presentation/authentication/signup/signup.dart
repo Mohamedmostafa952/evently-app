@@ -55,9 +55,9 @@ class _SignUpState extends State<SignUp> {
       body: Column(
         children: [
           Expanded(flex: 1, child: Image.asset(ImageAssets.eventlyLogo)),
-          SizedBox(height: 24.h),
+          SizedBox(height: 20.h),
           Expanded(
-            flex: 4,
+            flex: 5,
             child: SingleChildScrollView(
               child: Padding(
                 padding: REdgeInsets.symmetric(horizontal: 16.0),

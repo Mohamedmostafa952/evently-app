@@ -39,7 +39,13 @@ class EventMapItem extends StatelessWidget {
                     Expanded(
                       child: Text(
                         "${event.lat}, ${event.lng}",
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(
+                            fontSize: 12.sp
+                        ),
                       ),
                     ),
                   ],

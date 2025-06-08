@@ -15,8 +15,8 @@ class StartingScreen extends StatefulWidget {
 }
 
 class _StartingScreenState extends State<StartingScreen> {
-  bool switchLangValue = false;
-  bool switchThemeValue = false;
+  // bool switchLangValue = false;
+  // bool switchThemeValue = false;
   late ConfigProvider configProvider;
 
   @override
@@ -56,20 +56,29 @@ class _StartingScreenState extends State<StartingScreen> {
                       ),
                     ),
                     Spacer(),
+                    // Switch(
+                    //   value: switchLangValue,
+                    //   onChanged: (value) {
+                    //     switchLangValue = value;
+                    //     if (switchLangValue) {
+                    //       configProvider.changeAppLang("ar");
+                    //     } else {
+                    //       configProvider.changeAppLang("en");
+                    //     }
+                    //     setState(() {});
+                    //   },
+                    //   activeThumbImage: AssetImage(ImageAssets.arabic),
+                    //   inactiveThumbImage: AssetImage(ImageAssets.english),
+                    // ),
                     Switch(
-                      value: switchLangValue,
+                      value: configProvider.currentLang == "ar",
                       onChanged: (value) {
-                        switchLangValue = !switchLangValue;
-                        if (switchLangValue) {
-                          configProvider.changeAppLang("ar");
-                        } else {
-                          configProvider.changeAppLang("en");
-                        }
-                        setState(() {});
+                        configProvider.changeAppLang(value ? "ar" : "en");
                       },
                       activeThumbImage: AssetImage(ImageAssets.arabic),
                       inactiveThumbImage: AssetImage(ImageAssets.english),
                     ),
+
                   ],
                 ),
                 Row(
@@ -81,21 +90,32 @@ class _StartingScreenState extends State<StartingScreen> {
                       ),
                     ),
                     Spacer(),
+                    // Switch(
+                    //   value: switchThemeValue,
+                    //   onChanged: (value) {
+                    //     switchThemeValue = value;
+                    //     if (switchThemeValue) {
+                    //       configProvider.changeAppTheme(ThemeMode.dark);
+                    //     } else {
+                    //       configProvider.changeAppTheme(ThemeMode.light);
+                    //     }
+                    //     setState(() {});
+                    //   },
+                    //   activeThumbImage: AssetImage(ImageAssets.dark),
+                    //   inactiveThumbImage: AssetImage(ImageAssets.light),
+                    //   inactiveThumbColor: ColorsManager.blue,
+                    // ),
                     Switch(
-                      value: switchThemeValue,
+                      value: configProvider.currentTheme == ThemeMode.dark,
                       onChanged: (value) {
-                        switchThemeValue = !switchThemeValue;
-                        if (switchThemeValue) {
-                          configProvider.changeAppTheme(ThemeMode.dark);
-                        } else {
-                          configProvider.changeAppTheme(ThemeMode.light);
-                        }
-                        setState(() {});
+                        configProvider.changeAppTheme(
+                            value ? ThemeMode.dark : ThemeMode.light);
                       },
                       activeThumbImage: AssetImage(ImageAssets.dark),
                       inactiveThumbImage: AssetImage(ImageAssets.light),
                       inactiveThumbColor: ColorsManager.blue,
                     ),
+
                   ],
                 ),
                 SizedBox(height: 16.h),
